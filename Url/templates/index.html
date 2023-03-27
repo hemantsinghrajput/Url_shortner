@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block body %}
+<div class="container mx-auto mt-4">
+    <h1 class="text-4xl mb-4">URL Shortener</h1>
+    <form method="post" action="{{ url_for('home_page') }}">
+        <div class="mb-4">
+            <label for="url" class="block mb-2 font-bold text-lg">Enter URL:</label>
+            <input type="text" id="url" name="url" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <button type="submit" class="py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">Shorten</button>
+    </form>
+    {% if short_url %}
+        <div class="my-4">
+            <p class="font-bold text-lg">Short URL:</p>
+            <div class="flex items-center mt-2">
+                <input type="text" id="myInput" value="{{ short_url }}" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <button onclick="myFunction()" id="copy-btn" class="ml-4 py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">Copy</button>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+}
+</script>
+{% endblock %}

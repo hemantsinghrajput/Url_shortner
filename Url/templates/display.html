@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Display
+{% endblock %}
+
+{% block body %}
+<div class="container mx-auto my-10">
+    <h1 class="text-3xl font-bold mb-5">URL Shortener History</h1>
+    <table class="table-auto border-collapse w-full">
+        <thead>
+            <tr>
+                <th class="px-4 py-2 text-gray-600 font-bold border-b border-gray-200">ID</th>
+                <th class="px-4 py-2 text-gray-600 font-bold border-b border-gray-200">Original URL</th>
+                <th class="px-4 py-2 text-gray-600 font-bold border-b border-gray-200">Short URL</th>
+                <th class="px-4 py-2 text-gray-600 font-bold border-b border-gray-200">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url in urls %}
+            <tr class="bg-gray-100">
+                <td class="px-4 py-2 border-b border-gray-200">{{ loop.index }}</td>
+                <td class="px-4 py-2 border-b border-gray-200">{{ url.long_url }}</td>
+                <td class="px-4 py-2 border-b border-gray-200">
+                    <a href="{{ url.short_url }}">{{ url.short_url }}</a>
+                </td>
+                <td class="px-4 py-2 border-b border-gray-200">
+                    <a href="/delete/{{ url.id }}" class="text-red-600 hover:text-red-900">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
